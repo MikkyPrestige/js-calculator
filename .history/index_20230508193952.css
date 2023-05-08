@@ -82,6 +82,7 @@ main {
   grid-gap: 1rem;
   grid-template-areas:
     "clear divide multiply del"
+    "square mod plusMinus cube"
     "seven eight nine minus"
     "four five six plus"
     "one two three equalTo"
@@ -132,8 +133,34 @@ main {
   font-weight: 300;
 }
 
+.operator:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
+.operator:active {
+  box-shadow: inset 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+}
+
 .num {
   background: #4B72A2;
+}
+
+.num:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
+.num:active {
+  box-shadow: inset 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
 }
 
 .clear {
@@ -142,9 +169,35 @@ main {
   grid-area: clear;
 }
 
+.clear:active {
+  box-shadow: inset 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
+}
+
+.clear:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
 .del {
   background: #E94560;
   grid-area: del;
+}
+
+.del:hover {
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
+}
+
+.del:active {
+  box-shadow: inset 0 0 0 0.2rem rgba(0, 0, 0, 0.2);
+  transform: scale(0.95);
 }
 
 .divide {
@@ -226,4 +279,9 @@ main {
   -o-border-radius: 3rem;
   width: unset;
   height: unset;
+}
+
+.equalTo:hover {
+  background: rgba(217, 217, 217, 0.78);
+  color: #0F3460;
 }
