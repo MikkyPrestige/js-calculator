@@ -6,7 +6,7 @@ const clearBtn = document.querySelector(".clear");
 const delBtn = document.querySelector(".del");
 const equalBtn = document.querySelector(".equalTo");
 
-let curr = "";
+let curr = "0";
 let prev = "";
 let operator = "";
 

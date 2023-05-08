@@ -11,9 +11,9 @@ let prev = "";
 let operator = "";
 
 const display = () => {
-  currValue.innerText = curr;
-  prevValue.innerText = prev;
-};
+    currValue.innerText = curr;
+    prevValue.innerText = prev;
+}
 
 const operation = () => {
   operatorBtn.forEach((operator) => {
@@ -29,8 +29,8 @@ const operation = () => {
       curr = "";
       display();
     });
-  });
-};
+  })
+}
 
 operation();
 
@@ -38,11 +38,8 @@ const buttons = () => {
   numBtn.forEach((num) => {
     num.addEventListener("click", () => {
       if (num.classList.contains("dot")) {
-        if (curr.includes(".") || curr === "") {
-          return;
-        } else {
-          curr += num.innerText;
-        }
+        if (curr.includes(".")) return;
+        curr += num.innerText;
       } else if (num.classList.contains("zero")) {
         if (curr === "") return;
         curr += num.innerText;
@@ -63,7 +60,7 @@ const clear = () => {
     operator = "";
     display();
   });
-};
+}
 
 clear();
 
@@ -72,6 +69,7 @@ const del = () => {
     curr = curr.slice(0, -1);
     display();
   });
-};
+}
 
 del();
+

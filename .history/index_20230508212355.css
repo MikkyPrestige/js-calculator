@@ -217,7 +217,7 @@ main {
 .equalTo {
   grid-area: equalTo;
   background: #0F3460;
-  color: rgba(217, 217, 217, 0.78);
+  color:rgba(217, 217, 217, 0.78)
   font-size: 3rem;
   font-weight: 300;
   border-radius: 3rem;

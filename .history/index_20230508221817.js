@@ -6,7 +6,7 @@ const clearBtn = document.querySelector(".clear");
 const delBtn = document.querySelector(".del");
 const equalBtn = document.querySelector(".equalTo");
 
-let curr = "";
+let curr = "0";
 let prev = "";
 let operator = "";
 
@@ -14,6 +14,8 @@ const display = () => {
   currValue.innerText = curr;
   prevValue.innerText = prev;
 };
+
+display();
 
 const operation = () => {
   operatorBtn.forEach((operator) => {

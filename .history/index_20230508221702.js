@@ -6,8 +6,8 @@ const clearBtn = document.querySelector(".clear");
 const delBtn = document.querySelector(".del");
 const equalBtn = document.querySelector(".equalTo");
 
-let curr = "";
-let prev = "";
+let curr = "0";
+let prev = "0";
 let operator = "";
 
 const display = () => {

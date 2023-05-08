@@ -38,8 +38,10 @@ const buttons = () => {
   numBtn.forEach((num) => {
     num.addEventListener("click", () => {
       if (num.classList.contains("dot")) {
-        if (curr.includes(".") || curr === "") {
+        if (curr.includes(".")) {
           return;
+        } else if (curr === "" || curr === "+" || curr === "-" || curr === "*" || curr === "/") {
+          curr += "0.";
         } else {
           curr += num.innerText;
         }
