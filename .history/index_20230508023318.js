@@ -1,1 +1,0 @@
-const currValue = document.querySelector('.curr-value');
