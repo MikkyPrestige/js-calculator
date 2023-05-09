@@ -8,8 +8,6 @@ const dotBtn = document.querySelector(".dot");
 const operatorBtn = document.querySelectorAll(".operator");
 const zeroBtn = document.querySelector(".zero");
 
-<<<<<<< Updated upstream
-=======
 
 let curr = "";
 let prev = "";
@@ -139,5 +137,3 @@ equalBtn.forEach((answer) => {
 //   }
 // }
 
-
->>>>>>> Stashed changes
