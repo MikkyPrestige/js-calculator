@@ -12,7 +12,7 @@ const DIV_SYMBOL = '÷'
 
 // Calculation and Parsing functions
 function calc(inputString) {
-  return 7.77;
+  return "7.77";
 }
 
 // User interface and input functions
