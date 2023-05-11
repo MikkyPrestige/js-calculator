@@ -8,15 +8,24 @@ const equalBtn = document.querySelector(".equalTo");
 
 let curr = "";
 let prev = "";
+let afterRezult = false;
 
 const display = () => {
   currValue.innerText = curr;
   prevValue.innerText = prev;
 };
 
+const clearAfterRezult = () => {
+  if (afterRezult){
+    prev = '';
+    afterRezult = false;
+  }
+}
+
 const operation = () => {
   operatorBtn.forEach((operator) => {
     operator.addEventListener("click", () => {
+      clearAfterRezult();
       if (curr === "") return;
       if (prev !== "") {
         prev = curr;
@@ -75,6 +84,7 @@ equalsListener();
 const buttons = () => {
   numBtn.forEach((num) => {
     num.addEventListener("click", () => {
+      clearAfterRezult();
       if (num.classList.contains("dot")) {
         if (curr.includes(".") || curr === "") {
           return;
