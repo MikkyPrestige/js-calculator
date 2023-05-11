@@ -5,6 +5,8 @@ const numBtn = document.querySelectorAll(".num");
 const clearBtn = document.querySelector(".clear");
 const delBtn = document.querySelector(".del");
 const equalBtn = document.querySelector(".equalTo");
+const MUL_SYMBOL = '×';
+const DIV_SYMBOL = '÷'
 
 // Math functions
 
@@ -99,7 +101,11 @@ const buttons = () => {
           curr += num.innerText;
         }
       } else if (num.classList.contains("zero")) {
-        if (curr === "") return;
+        if (prev.endsWith(DIV_SYMBOL) && curr === "")
+        {
+          alert("Can't compute division by Zero\n💫🤖💫")
+          return;
+        }
         curr += num.innerText;
       } else {
         curr += num.innerText;
@@ -158,9 +164,6 @@ function clickDel() {
 function clickClear() {
   clearBtn.click()
 }
-
-const MUL_SYMBOL = '×';
-const DIV_SYMBOL = '÷'
 window.addEventListener('keydown', (e) => {
   if (e.key === '0'
   || e.key === '1'
