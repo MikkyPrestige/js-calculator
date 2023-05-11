@@ -8,7 +8,6 @@ const equalBtn = document.querySelector(".equalTo");
 
 let curr = "";
 let prev = "";
-let operator = "";
 
 const display = () => {
   currValue.innerText = curr;
@@ -60,7 +59,6 @@ const clear = () => {
   clearBtn.addEventListener("click", () => {
     curr = "";
     prev = "";
-    operator = "";
     display();
   });
 };
