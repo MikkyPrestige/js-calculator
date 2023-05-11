@@ -6,6 +6,14 @@ const clearBtn = document.querySelector(".clear");
 const delBtn = document.querySelector(".del");
 const equalBtn = document.querySelector(".equalTo");
 
+// Math functions
+
+// Calculation and Parsing functions
+function calc(inputString) {
+  return 7.77;
+}
+
+// User interface and input functions
 let curr = "";
 let prev = "";
 let afterRezult = false;
