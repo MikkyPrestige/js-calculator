@@ -33,6 +33,45 @@ const operation = () => {
 
 operation();
 
+function canPressEquals(equation) {
+  isValid = true;
+
+  // check if empty equation
+  if(equation === '' || equation === null) {
+    isValid = false;
+  }
+
+  // check if equation doesnt end with an operator symbol
+  operatorBtn.forEach(op =>{
+    endSymbol = equation.slice(-1);
+    if (equation.endsWith(op.innerText)){
+      console.debug(`DEBUG endsWith=${op.innerText}`)
+      isValid = false;
+      return isValid;
+    }
+  });
+
+  console.debug(`DEBUG equation isValid = ${isValid}`);
+  return isValid;
+}
+
+const equalsListener = () => {
+  equalBtn.addEventListener("click", () => {
+    clearAfterRezult();
+    prev += curr;
+    console.debug(`DEBUG full input line = ${prev}`)
+    if(!canPressEquals(prev))
+      return;
+
+    curr = calc(prev);
+    prev += '='
+    afterRezult = true;
+    display();
+  });
+};
+
+equalsListener();
+
 const buttons = () => {
   numBtn.forEach((num) => {
     num.addEventListener("click", () => {
