@@ -36,12 +36,11 @@ const operation = () => {
       clearAfterRezult();
       if (curr === "") return;
       if (prev !== "") {
-        prev = curr;
+        prev += curr;
       } else {
         prev = curr;
       }
-      curr = operator.innerText;
-      prev = curr;
+      prev += operator.innerText;
       curr = "";
       display();
     });
