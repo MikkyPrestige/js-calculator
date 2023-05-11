@@ -129,6 +129,11 @@ clear();
 
 const del = () => {
   delBtn.addEventListener("click", () => {
+    if (curr == "" && prev !== "") {
+      curr = prev;
+      prev = '';
+    }
+
     curr = curr.slice(0, -1);
     display();
   });
