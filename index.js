@@ -345,12 +345,3 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
-
-
-const expression = prev;
-const expressionTokens = tokenize(expression);
-const result = evaluateTokens(expressionTokens);
-
-console.log(result); // Output: 7.5
-
-
