@@ -61,76 +61,6 @@ function formatNumber(x) {
     }
   }
 
-// Calculation and Parsing functions
-function tokenize(expression) {
-  const tokens = [];
-  let currentToken = '';
-
-  for (let i = 0; i < expression.length; i++) {
-    const char = expression[i];
-
-    if (/\s/.test(char)) {
-
-      // Skip whitespace
-      continue;
-    }
-
-    if (/[+\-*÷/×()]/.test(char)) {
-
-      // Operator or Parentheses
-      if (currentToken !== '') {
-        tokens.push(parseFloat(currentToken));
-        currentToken = '';
-      }
-      tokens.push(char);
-    } else if (/\d/.test(char) || char === '.') {
-
-      // Number
-      currentToken += char;
-    } else {
-      
-      // Invalid character
-      throw new Error(`Invalid character: ${char}`);
-    }
-  }
-
-  if (currentToken !== '') {
-    tokens.push(parseFloat(currentToken));
-  }
-
-  return tokens;
-}
-
-
-function evaluateTokens(tokens) {
-  let result = parseFloat(tokens[0]); // Initialize result with the first number token
-
-  for (let i = 1; i < tokens.length; i += 2) {
-    const operator = tokens[i];
-    const number = parseFloat(tokens[i + 1]);
-
-    switch (operator) {
-      case '+':
-        result = add(result, number);
-        break;
-      case '-':
-        result = sub(result, number);
-        break;
-      case '×':
-        result = mul(result, number);
-        break;
-      case '÷':
-        result = div(result, number);
-        break;
-      default:
-        throw new Error('Invalid operator: ' + operator);
-    }
-  }
-
-  return result;
-}
-
-// User interface and input functions
 let curr = "";
 let prev = "";
 let operator = "";
@@ -158,25 +88,6 @@ const operation = () => {
 };
 
 operation();
-
-const equalsListener = () => {
-  equalBtn.addEventListener("click", () => {
-    clearAfterRezult();
-    if(endsWithOperator(curr)
-    || (curr == "" && endsWithOperator(prev))
-    || (curr == "" && prev == ""))
-      return;
-
-    prev += curr;
-    console.debug(`DEBUG full input line = ${prev}`)
-    curr = formatNumber(evaluateTokens(tokenize(prev)));
-    prev += '='
-    afterRezult = true;
-    display();
-  });
-};
-
-equalsListener();
 
 const buttons = () => {
   numBtn.forEach((num) => {
@@ -219,60 +130,3 @@ const del = () => {
 };
 
 del();
-
-// Keyboard input support
-function clickNumber(key) {
-  numBtn.forEach((button) => {
-    if (button.innerText === key) {
-      button.click()
-    }
-  })
-}
-
-function clickOperator(key) {
-  operatorBtn.forEach((button) => {
-    if (button.innerText === key) {
-      button.click()
-    }
-  });
-}
-
-function clickEquals() {
-  equalBtn.click()
-}
-
-function clickDel() {
-  delBtn.click()
-}
-
-function clickClear() {
-  clearBtn.click()
-}
-window.addEventListener('keydown', (e) => {
-  if (e.key === '0'
-  || e.key === '1'
-  || e.key === '2'
-  || e.key === '3'
-  || e.key === '4'
-  || e.key === '5'
-  || e.key === '6'
-  || e.key === '7'
-  || e.key === '8'
-  || e.key === '9'
-  || e.key === '.') {
-    clickNumber(e.key)
-  } else if (e.key === '+' || e.key === '-') {
-    clickOperator(e.key)
-  } else if (e.key === '*') {
-    clickOperator(MUL_SYMBOL)
-  } else if (e.key === '/') {
-    clickOperator(DIV_SYMBOL)
-  } else if (e.key === 'Enter' || e.key === '=') {
-    clickEquals()
-  } else if (e.key === 'Backspace') {
-    clickDel()
-  } else if (e.key === 'Delete') {
-    clickClear()
-  }
-});
-
