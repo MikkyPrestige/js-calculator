@@ -123,6 +123,7 @@ const clear = () => {
   clearBtn.addEventListener("click", () => {
     curr = "";
     prev = "";
+    afterRezult = false;
     display();
   });
 };
@@ -135,6 +136,8 @@ const del = () => {
       curr = prev;
       prev = '';
     }
+    if (afterRezult)
+      afterRezult = false;
 
     curr = curr.slice(0, -1);
     display();
