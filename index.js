@@ -347,9 +347,9 @@ window.addEventListener('keydown', (e) => {
 
 
 
-const expression = '12.54/32*687.21+15';
+const expression = prev;
 const expressionTokens = tokenize(expression);
-const result = evaluateTokens(expressionTokens.);
+const result = evaluateTokens(expressionTokens);
 
 console.log(result); // Output: 7.5
 
