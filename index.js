@@ -283,7 +283,7 @@ window.addEventListener('keydown', (e) => {
 
 
 function tokenize(expression) {
-  const token = [];
+  const tokens = [];
   let currentToken = '';
 
   for (let i = 0; i < expression.length; i++) {
@@ -299,10 +299,10 @@ function tokenize(expression) {
 
       // Operator or Parentheses
       if (currentToken !== '') {
-        token.push(parseFloat(currentToken));
+        tokens.push(parseFloat(currentToken));
         currentToken = '';
       }
-      token.push(char);
+      tokens.push(char);
     } else if (/\d/.test(char) || char === '.') {
 
       // Number
@@ -315,19 +315,45 @@ function tokenize(expression) {
   }
 
   if (currentToken !== '') {
-    token.push(parseFloat(currentToken));
+    tokens.push(parseFloat(currentToken));
   }
 
-  return token;
+  return tokens;
 }
 
-//Cornfirm token type
-function isNumber(token) {
-  return token !== undefined && token.match(/^[0-9]+$/) !== null;
+
+function evaluateTokens(tokens) {
+  let result = parseFloat(tokens[0]); // Initialize result with the first number token
+
+  for (let i = 1; i < tokens.length; i += 2) {
+    const operator = tokens[i];
+    const number = parseFloat(tokens[i + 1]);
+
+    switch (operator) {
+      case '+':
+        result = add(result, number);
+        break;
+      case '-':
+        result = sub(result, number);
+        break;
+      case '*':
+        result = mul(result, number);
+        break;
+      case '/':
+        result = div(result, number);
+        break;
+      default:
+        throw new Error('Invalid operator: ' + operator);
+    }
+  }
+
+  return result;
 }
 
-function isName(token) {
-  return token !== undefined && token.match(/^[A-Za-z]+$/) !== null;
-}
+const expression = '12.54/32*687.21+15';
+const expressionTokens = tokenize(expression);
+const result = evaluateTokens(expressionTokens);
+
+console.log(result); // Output: 7.5
 
 
