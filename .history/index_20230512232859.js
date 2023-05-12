@@ -226,16 +226,11 @@ clear();
 
 const del = () => {
   delBtn.addEventListener("click", () => {
-    if (curr == "" && prev !== "") {
-      curr = prev;
-      prev = '';
-    }
-    if (afterRezult)
-      afterRezult = false;
-
+    if (curr === "") return;
     curr = curr.slice(0, -1);
     display();
-  });
+  }
+  );
 };
 
 del();

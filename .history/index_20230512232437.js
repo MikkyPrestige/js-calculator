@@ -174,7 +174,7 @@ const equalsListener = () => {
 
     prev += curr;
     curr = formatNumber(evaluateTokens(tokenize(prev)));
-    prev += ''
+    prev += '='
     afterRezult = true;
     display();
   });
