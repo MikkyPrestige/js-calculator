@@ -38,12 +38,22 @@ numBtn.forEach((btn) => {
   });
 });
 
+const isNumberOrCloseParen = (input) => {
+  return isNaN(input) || input === ")";
+};
+
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
-    operator = op.innerText;
-    curr += operator;
-    display();
+    if (isNumberOrCloseParen(prev.charAt(prev.length - 1))) {
+      operator = op.innerText;
+      curr += operator;
+      // curr = "";
+      display();
+    }
+    // operator = op.innerText;
+    // curr += operator;
+    // display();
   });
 });
 

@@ -38,14 +38,33 @@ numBtn.forEach((btn) => {
   });
 });
 
+// operatorBtn.forEach((op) => {
+//   op.addEventListener("click", () => {
+//     if (curr === "") {
+//       return
+//     } else if (curr === operatorBtn) {
+//       return
+//     } else {
+//       operator = op.innerText;
+//       curr += operator;
+//       display();
+//     }
+//   });
+// });
+
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
-    operator = op.innerText;
-    curr += operator;
+    const lastChar = prev.slice(-1);
+    if (lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/") {
+      prev = prev.slice(0, -1);
+    }
+    prev += curr + op.innerText;
+    curr = "";
     display();
   });
 });
+
 
 equalBtn.addEventListener("click", () => {
   if (curr === "" || prev === "") return;

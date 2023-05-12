@@ -41,6 +41,11 @@ numBtn.forEach((btn) => {
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
+    if (prev !== "") {
+      console.log(prev)
+      display();
+      // calculation();
+    }
     operator = op.innerText;
     curr += operator;
     display();

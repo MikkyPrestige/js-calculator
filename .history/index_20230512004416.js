@@ -42,6 +42,10 @@ operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
     operator = op.innerText;
+    if (curr.includes(
+      "+") || curr.includes("-") || curr.includes("*") || curr.includes("/")) {
+      calculation();
+    }
     curr += operator;
     display();
   });

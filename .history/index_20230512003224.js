@@ -40,7 +40,6 @@ numBtn.forEach((btn) => {
 
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
-    if (curr === "") return;
     operator = op.innerText;
     curr += operator;
     display();

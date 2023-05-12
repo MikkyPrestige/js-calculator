@@ -38,14 +38,30 @@ numBtn.forEach((btn) => {
   });
 });
 
+// operatorBtn.forEach((op) => {
+//   op.addEventListener("click", () => {
+//     if (curr === "") return;
+//     // operator = op.innerText;
+//     // curr += operator;
+//     // display();
+//   });
+// });
+
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
-    if (curr === "") return;
-    operator = op.innerText;
-    curr += operator;
+    if (curr === "") {
+      return;
+    } else if (/[\+\-\*\/]$/.test(prev)) {
+      prev = prev.slice(0, -1);
+      prev += op.innerText;
+    } else{
+      prev += curr + op.innerText;
+    }
+    curr = "";
     display();
   });
 });
+
 
 equalBtn.addEventListener("click", () => {
   if (curr === "" || prev === "") return;

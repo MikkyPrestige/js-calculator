@@ -18,6 +18,10 @@ const display = () => {
   Result.innerText = result;
 };
 
+const isNumberOrCloseParen = (input) => {
+  return !isNaN(input) || input === ")";
+};
+
 clearBtn.addEventListener("click", () => {
   curr = "";
   prev = "";
@@ -41,9 +45,15 @@ numBtn.forEach((btn) => {
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
-    operator = op.innerText;
-    curr += operator;
-    display();
+    if (isNumberOrCloseParen(prev.charAt(prev.length - 1))) {
+      operator = op.innerText;
+      prev = curr + operator;
+      curr = "";
+      display();
+    }
+    // operator = op.innerText;
+    // if (curr.includes(operator)) return
+    // display();
   });
 });
 

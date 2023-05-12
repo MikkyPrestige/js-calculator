@@ -42,6 +42,7 @@ operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
     operator = op.innerText;
+    if (curr.includes(op)) return
     curr += operator;
     display();
   });

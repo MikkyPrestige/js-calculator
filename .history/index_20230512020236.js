@@ -1,0 +1,86 @@
+const currValue = document.getElementById("curr");
+const prevValue = document.getElementById("prev");
+const Result = document.getElementById("result");
+const operatorBtn = document.querySelectorAll(".operator");
+const numBtn = document.querySelectorAll(".num");
+const clearBtn = document.querySelector(".clear");
+const delBtn = document.querySelector(".del");
+const equalBtn = document.querySelector(".equalTo");
+
+let curr = "";
+let prev = "";
+let result = "";
+let operator = "";
+
+const display = () => {
+  currValue.innerText = curr;
+  prevValue.innerText = prev;
+  Result.innerText = result;
+};
+
+clearBtn.addEventListener("click", () => {
+  curr = "";
+  prev = "";
+  result = "";
+  display();
+});
+
+delBtn.addEventListener("click", () => {
+  curr = curr.slice(0, -1);
+  display();
+});
+
+operatorBtn.forEach((op) => {
+  op.addEventListener("click", () => {
+    if (curr === "") return;
+    const lastChar = prev.slice(-1);
+    if (lastChar === "+" || lastChar === "-" || lastChar === "*" || lastChar === "/") {
+      prev = prev.slice(0, -1);
+    }
+    prev += curr + op.innerText;
+    curr = "";
+    display();
+  });
+});
+
+numBtn.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (curr === "0" && btn.innerText === "0") return;
+    if (curr === "" && btn.innerText === "0") return;
+    if (prev.slice(-1) === "/" && btn.innerText === "0") {
+      alert("Cannot divide by zero");
+      return;
+    }
+    curr += btn.innerText;
+    display();
+  });
+});
+
+
+// numBtn.forEach((btn) => {
+//   btn.addEventListener("click", () => {
+//     if (btn.innerText === "." && curr.includes(".")) return;
+//     curr += btn.innerText;
+//     display();
+//   });
+// });
+
+// operatorBtn.forEach((op) => {
+//   op.addEventListener("click", () => {
+//     if (curr === "") {
+//       return
+//     } else if (curr === operatorBtn) {
+//       return
+//     } else {
+//       operator = op.innerText;
+//       curr += operator;
+//       display();
+//     }
+//   });
+// });
+
+equalBtn.addEventListener("click", () => {
+  if (curr === "" || prev === "") return;
+  // calculation function
+  display();
+});

@@ -40,10 +40,20 @@ numBtn.forEach((btn) => {
 
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
-    if (curr === "") return;
-    operator = op.innerText;
-    curr += operator;
-    display();
+    if (curr === "") {
+      return;
+    } else if (curr.includes(
+      "+",
+      "-",
+      "*",
+      "/",
+    )) {
+      return;
+    } else {
+      operator = op.innerText;
+      curr += operator;
+      display();
+    }
   });
 });
 

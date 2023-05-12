@@ -38,10 +38,25 @@ numBtn.forEach((btn) => {
   });
 });
 
+// operatorBtn.forEach((op) => {
+//   op.addEventListener("click", () => {
+//     if (curr === "") return;
+//     // operator = op.innerText;
+//     // curr += operator;
+//     // display();
+//   });
+// });
+
 operatorBtn.forEach((op) => {
   op.addEventListener("click", () => {
     if (curr === "") return;
-    operator = op.innerText;
+    // Check if the last character of the previous input is an operator
+    if (/[\+\-\*\/]$/.test(prev)) {
+      // Remove the last character from the previous input
+      prev = prev.slice(0, -1);
+    }
+    // prev += curr + op.innerText;
+    // curr = "";
     curr += operator;
     display();
   });
