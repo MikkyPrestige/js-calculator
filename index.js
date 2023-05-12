@@ -32,9 +32,26 @@ const clearAfterRezult = () => {
   }
 }
 
+function endsWithOperator(input) {
+  isTrue = false;
+  
+  // check if equation doesnt end with an operator symbol
+  operatorBtn.forEach(op =>{
+    endSymbol = input.slice(-1);
+    if (input.endsWith(op.innerText)){
+      isTrue = true;
+      return isTrue;
+    }
+  });
+
+  return isTrue;
+}
+
 const operation = () => {
   operatorBtn.forEach((operator) => {
     operator.addEventListener("click", () => {
+      if(endsWithOperator(curr))
+        return;
       clearAfterRezult();
       if (curr === "") return;
       if (prev !== "") {
@@ -51,34 +68,13 @@ const operation = () => {
 
 operation();
 
-function canPressEquals(equation) {
-  isValid = true;
-
-  // check if empty equation
-  if(equation === '' || equation === null) {
-    isValid = false;
-  }
-
-  // check if equation doesnt end with an operator symbol
-  operatorBtn.forEach(op =>{
-    endSymbol = equation.slice(-1);
-    if (equation.endsWith(op.innerText)){
-      console.debug(`DEBUG endsWith=${op.innerText}`)
-      isValid = false;
-      return isValid;
-    }
-  });
-
-  console.debug(`DEBUG equation isValid = ${isValid}`);
-  return isValid;
-}
-
 const equalsListener = () => {
   equalBtn.addEventListener("click", () => {
     clearAfterRezult();
     prev += curr;
     console.debug(`DEBUG full input line = ${prev}`)
-    if(!canPressEquals(prev))
+    if(endsWithOperator(prev)
+    || (curr == "" && prev == ""))
       return;
 
     curr = calc(prev);
@@ -93,6 +89,10 @@ equalsListener();
 const buttons = () => {
   numBtn.forEach((num) => {
     num.addEventListener("click", () => {
+      if(endsWithOperator(curr)) {
+        prev = curr;
+        curr = '';
+      }
       clearAfterRezult();
       if (num.classList.contains("dot")) {
         if (curr.includes(".") || curr === "") {
