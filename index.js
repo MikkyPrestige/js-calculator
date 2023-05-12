@@ -280,3 +280,43 @@ window.addEventListener('keydown', (e) => {
     clickClear()
   }
 });
+
+
+function tokenize(expression) {
+  const tokens = [];
+  let currentToken = '';
+
+  for (let i = 0; i < expression.length; i++) {
+    const char = expression[i];
+
+    if (/\s/.test(char)) {
+
+      // Skip whitespace
+      continue;
+    }
+
+    if (/[+\-*/()]/.test(char)) {
+
+      // Operator or Parentheses
+      if (currentToken !== '') {
+        tokens.push(parseFloat(currentToken));
+        currentToken = '';
+      }
+      tokens.push(char);
+    } else if (/\d/.test(char) || char === '.') {
+
+      // Number
+      currentToken += char;
+    } else {
+      
+      // Invalid character
+      throw new Error(`Invalid character: ${char}`);
+    }
+  }
+
+  if (currentToken !== '') {
+    tokens.push(parseFloat(currentToken));
+  }
+
+  return tokens;
+}
