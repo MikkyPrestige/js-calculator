@@ -90,8 +90,72 @@ function formatNumber(x) {
 
 
 // Calculation and Parsing functions
-function calc(inputString) {
-  return "7.77";
+function tokenize(expression) {
+  const tokens = [];
+  let currentToken = '';
+
+  for (let i = 0; i < expression.length; i++) {
+    const char = expression[i];
+
+    if (/\s/.test(char)) {
+
+      // Skip whitespace
+      continue;
+    }
+
+    if (/[+\-*/()]/.test(char)) {
+
+      // Operator or Parentheses
+      if (currentToken !== '') {
+        tokens.push(parseFloat(currentToken));
+        currentToken = '';
+      }
+      tokens.push(char);
+    } else if (/\d/.test(char) || char === '.') {
+
+      // Number
+      currentToken += char;
+    } else {
+      
+      // Invalid character
+      throw new Error(`Invalid character: ${char}`);
+    }
+  }
+
+  if (currentToken !== '') {
+    tokens.push(parseFloat(currentToken));
+  }
+
+  return tokens;
+}
+
+
+function evaluateTokens(tokens) {
+  let result = parseFloat(tokens[0]); // Initialize result with the first number token
+
+  for (let i = 1; i < tokens.length; i += 2) {
+    const operator = tokens[i];
+    const number = parseFloat(tokens[i + 1]);
+
+    switch (operator) {
+      case '+':
+        result = add(result, number);
+        break;
+      case '-':
+        result = sub(result, number);
+        break;
+      case '*':
+        result = mul(result, number);
+        break;
+      case '/':
+        result = div(result, number);
+        break;
+      default:
+        throw new Error('Invalid operator: ' + operator);
+    }
+  }
+
+  return result;
 }
 
 // User interface and input functions
@@ -158,7 +222,7 @@ const equalsListener = () => {
 
     prev += curr;
     console.debug(`DEBUG full input line = ${prev}`)
-    curr = calc(prev);
+    curr = formatNumber(evaluateTokens(tokenize(prev)));
     prev += '='
     afterRezult = true;
     display();
@@ -282,77 +346,10 @@ window.addEventListener('keydown', (e) => {
 });
 
 
-function tokenize(expression) {
-  const tokens = [];
-  let currentToken = '';
-
-  for (let i = 0; i < expression.length; i++) {
-    const char = expression[i];
-
-    if (/\s/.test(char)) {
-
-      // Skip whitespace
-      continue;
-    }
-
-    if (/[+\-*/()]/.test(char)) {
-
-      // Operator or Parentheses
-      if (currentToken !== '') {
-        tokens.push(parseFloat(currentToken));
-        currentToken = '';
-      }
-      tokens.push(char);
-    } else if (/\d/.test(char) || char === '.') {
-
-      // Number
-      currentToken += char;
-    } else {
-      
-      // Invalid character
-      throw new Error(`Invalid character: ${char}`);
-    }
-  }
-
-  if (currentToken !== '') {
-    tokens.push(parseFloat(currentToken));
-  }
-
-  return tokens;
-}
-
-
-function evaluateTokens(tokens) {
-  let result = parseFloat(tokens[0]); // Initialize result with the first number token
-
-  for (let i = 1; i < tokens.length; i += 2) {
-    const operator = tokens[i];
-    const number = parseFloat(tokens[i + 1]);
-
-    switch (operator) {
-      case '+':
-        result = add(result, number);
-        break;
-      case '-':
-        result = sub(result, number);
-        break;
-      case '*':
-        result = mul(result, number);
-        break;
-      case '/':
-        result = div(result, number);
-        break;
-      default:
-        throw new Error('Invalid operator: ' + operator);
-    }
-  }
-
-  return result;
-}
 
 const expression = '12.54/32*687.21+15';
 const expressionTokens = tokenize(expression);
-const result = evaluateTokens(expressionTokens);
+const result = evaluateTokens(expressionTokens.);
 
 console.log(result); // Output: 7.5
 
