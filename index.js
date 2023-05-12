@@ -283,7 +283,7 @@ window.addEventListener('keydown', (e) => {
 
 
 function tokenize(expression) {
-  const tokens = [];
+  const token = [];
   let currentToken = '';
 
   for (let i = 0; i < expression.length; i++) {
@@ -299,10 +299,10 @@ function tokenize(expression) {
 
       // Operator or Parentheses
       if (currentToken !== '') {
-        tokens.push(parseFloat(currentToken));
+        token.push(parseFloat(currentToken));
         currentToken = '';
       }
-      tokens.push(char);
+      token.push(char);
     } else if (/\d/.test(char) || char === '.') {
 
       // Number
@@ -315,8 +315,19 @@ function tokenize(expression) {
   }
 
   if (currentToken !== '') {
-    tokens.push(parseFloat(currentToken));
+    token.push(parseFloat(currentToken));
   }
 
-  return tokens;
+  return token;
 }
+
+//Cornfirm token type
+function isNumber(token) {
+  return token !== undefined && token.match(/^[0-9]+$/) !== null;
+}
+
+function isName(token) {
+  return token !== undefined && token.match(/^[A-Za-z]+$/) !== null;
+}
+
+
