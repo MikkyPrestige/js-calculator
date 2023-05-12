@@ -39,6 +39,7 @@ function endsWithOperator(input) {
   operatorBtn.forEach(op =>{
     endSymbol = input.slice(-1);
     if (input.endsWith(op.innerText)){
+      console.debug(`DEBUG endsWith=${op.innerText}`)
       isTrue = true;
       return isTrue;
     }
@@ -71,12 +72,13 @@ operation();
 const equalsListener = () => {
   equalBtn.addEventListener("click", () => {
     clearAfterRezult();
-    prev += curr;
-    console.debug(`DEBUG full input line = ${prev}`)
-    if(endsWithOperator(prev)
+    if(endsWithOperator(curr)
+    || (curr == "" && endsWithOperator(prev))
     || (curr == "" && prev == ""))
       return;
 
+    prev += curr;
+    console.debug(`DEBUG full input line = ${prev}`)
     curr = calc(prev);
     prev += '='
     afterRezult = true;
