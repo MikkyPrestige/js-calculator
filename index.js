@@ -103,7 +103,7 @@ function tokenize(expression) {
       continue;
     }
 
-    if (/[+\-*/×()]/.test(char)) {
+    if (/[+\-*÷/×()]/.test(char)) {
 
       // Operator or Parentheses
       if (currentToken !== '') {
@@ -147,7 +147,7 @@ function evaluateTokens(tokens) {
       case '×':
         result = mul(result, number);
         break;
-      case '/':
+      case '÷':
         result = div(result, number);
         break;
       default:
