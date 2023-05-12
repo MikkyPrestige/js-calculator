@@ -65,27 +65,28 @@ function formatNumber(x) {
   }
 
   // OLD IMPL OF EQUALS BUTTON
-  // TODO: remake to be a function that parses the math equation and calls on math functions above.
-  // the function should return a string - formatedNumber() can be used/
-  var num1 = parseFloat(prev);
-  var num2 = parseFloat(curr);
-  var answer; 
-  const results = () => {
-    equalBtn.addEventListener("click", () => {
+  // TODO: remake to be a function 'calc(inputString)' (there is a placeholder below)
+  // that parses the math equation and calls on math functions above.
+  // the function should return a string - formatedNumber(resultNumber) can be used for that
+  // var num1 = parseFloat();
+  // var num2 = parseFloat();
+  // var answer; 
+  // const results = () => {
+  //   equalBtn.addEventListener("click", () => {
       
-      answer = add(num1,num2);
-      // if (operator==="+"){
+  //     answer = add(num1,num2);
+  //     // if (operator==="+"){
         
-      // }
+  //     // }
 
-      currValue.innerText = answer
-      curr = answer
-      prev = ''
-      display();
-    });
-  };
+  //     currValue.innerText = answer
+  //     curr = answer
+  //     prev = ''
+  //     display();
+  //   });
+  // };
 
-  results();
+  // results();
 
 
 // Calculation and Parsing functions
