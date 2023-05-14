@@ -49,7 +49,7 @@ function formatNumber(x) {
         return x.toPrecision(MAX_NUM_LENGTH - 1);
       } else {
         // Use fixed notation with the appropriate number of fractional digits
-        return x.toFixed(numFracDigits);
+        return x.toFixed(4);
       }
     }
   }
@@ -203,7 +203,8 @@ const buttons = () => {
           return;
         }
         curr += num.innerText;
-      } else {
+      } 
+      else{
         curr += num.innerText;
       }
       display();
@@ -291,7 +292,7 @@ window.addEventListener('keydown', (e) => {
     clickEquals()
   } else if (e.key === 'Backspace') {
     clickDel()
-  } else if (e.key === 'Delete') {
+  } else if (e.key === 'Delete' || e.key === 'Escape') {
     clickClear()
   }
 });
