@@ -223,7 +223,6 @@ const buttons = () => {
       clearAfterRezult();
       // limit '0' inputs
       if (curr === "0" && num.innerText == "0") {
-        console.log(`no extra zeros`);
         return;
       }
       if (num.classList.contains("dot")) {
@@ -239,8 +238,7 @@ const buttons = () => {
           return;
         }
         curr += num.innerText;
-      } 
-      else{
+      } else {
         curr += num.innerText;
       }
       display();
@@ -333,4 +331,3 @@ window.addEventListener('keydown', (e) => {
     clickClear()
   }
 });
-
