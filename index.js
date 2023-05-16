@@ -197,6 +197,13 @@ const operation = () => {
 
 operation();
 
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Prevent default behavior
+    return false;
+  }
+});
+
 const equalsListener = () => {
   equalBtn.addEventListener("click", () => {
     clearAfterRezult();
