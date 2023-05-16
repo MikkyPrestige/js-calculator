@@ -137,7 +137,7 @@ const display = () => {
 
 const clearAfterRezult = () => {
   if (afterRezult){
-    prev = '';
+    prev = "";
     afterRezult = false;
   }
 }
@@ -205,7 +205,7 @@ const equalsListener = () => {
 
     prev += curr;
     curr = formatNumber(evaluateTokens(tokenize(prev)));
-    prev += ''
+    // prev += "";
     afterRezult = true;
     display();
   });
@@ -218,7 +218,7 @@ const buttons = () => {
     num.addEventListener("click", () => {
       if(endsWithOperator(curr)) {
         prev = curr;
-        curr = '';
+        curr = "";
       }
       clearAfterRezult();
       // limit '0' inputs
@@ -266,7 +266,7 @@ const del = () => {
       prev = "";
     }
     // stop after rezult display clear after previous input line starts being edited (deleted)
-    if (afterRezult && curr === "")
+    if (afterRezult && prev === "")
       afterRezult = false;
 
     curr = curr.slice(0, -1);
