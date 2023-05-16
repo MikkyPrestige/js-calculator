@@ -160,15 +160,32 @@ function endsWithOperator(input) {
 const operation = () => {
   operatorBtn.forEach((operator) => {
     operator.addEventListener("click", () => {
-      if(endsWithOperator(curr))
-        return;
+      // Clear previous input field and update it with current input 
       clearAfterRezult();
+      if(endsWithOperator(curr)) {
+        // Change operators if current input line ends with one
+        prev = curr.slice(0, -1);
+        prev += operator.innerText;
+        curr = "";
+        display();
+        return;
+      }
+      if(endsWithOperator(prev) && curr === "") {
+        // Change operators if previous input line ends with one and no new number entered
+        prev = prev.slice(0, -1);
+        prev += operator.innerText;
+        display();
+        return;
+      }
       if (curr === "") return;
       if (prev !== "") {
+        // Add new number from current input to previous input that already should contain an operator
         prev += curr;
       } else {
+        // If previous input was empty set it to current input number
         prev = curr;
       }
+      // Add pressed operator to previous input
       prev += operator.innerText;
       curr = "";
       display();
