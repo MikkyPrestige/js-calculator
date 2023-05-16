@@ -221,6 +221,11 @@ const buttons = () => {
         curr = '';
       }
       clearAfterRezult();
+      // limit '0' inputs
+      if (curr === "0" && num.innerText == "0") {
+        console.log(`no extra zeros`);
+        return;
+      }
       if (num.classList.contains("dot")) {
         if (curr.includes(".") || curr === "") {
           return;
