@@ -181,6 +181,8 @@ const operation = () => {
       if (prev !== "") {
         // Add new number from current input to previous input that already should contain an operator
         prev += curr;
+        // Calculate result and update previous input line
+        prev = formatNumber(evaluateTokens(tokenize(prev)));
       } else {
         // If previous input was empty set it to current input number
         prev = curr;
