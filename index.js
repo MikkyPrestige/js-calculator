@@ -29,30 +29,44 @@ function div(num1, num2) {
 // Formatting function to fit number to screen by constants
 const MAX_NUM_LENGTH = 14;  // number of digits that fit to screen
 const LARGE_NUMBER = 1e14;   // what is considered a large number (should match the MAX_NUM_LENGTH)
-const MAX_EXP_LENGTH = 3; // number of digits for exponential notation
+const MAX_EXP_LENGTH = 5; // number of digits for exponential notation
+const MAX_FRACTION_DIGITS = 6;
 
 function formatNumber(x) {
-    let str = x.toString();
-    let numDigits = str.replace(".", "").length;
+  let str = x.toString();
+  let numDigits = str.replace(".", "").length;
 
-    if (numDigits <= MAX_NUM_LENGTH) {
-      return str;
-    } else if (Math.abs(x) >= LARGE_NUMBER) {
-      // The number is very large, use exponential notation
-      return x.toExponential(MAX_NUM_LENGTH - MAX_EXP_LENGTH);
+  if (numDigits <= MAX_NUM_LENGTH) {
+    // The number is short, constrain fractional digits      
+    let decimalPos = str.indexOf('.');
+    let numFracDigits = decimalPos === -1 ? 0 : str.length - decimalPos - 1;
+    let actualFracDigits = Math.min(MAX_FRACTION_DIGITS, numFracDigits);
+    if (actualFracDigits < 0) {
+      str = x.toPrecision(MAX_NUM_LENGTH - 1);
     } else {
-      // The number is not too large, use fixed or precision notation
-      let numIntDigits = Math.floor(Math.log10(Math.abs(x))) + 1;
-      let numFracDigits = MAX_NUM_LENGTH - numIntDigits - 1;
+      str = x.toFixed(actualFracDigits);
+    }
+  } else if (Math.abs(x) >= LARGE_NUMBER) {
+    // The number is very large, use exponential notation
+    str = x.toExponential(MAX_NUM_LENGTH - MAX_EXP_LENGTH);
+  } else {
+    // The number is not too large, use fixed or precision notation
+    let numIntDigits = Math.floor(Math.log10(Math.abs(x))) + 1;
+    let numFracDigits = MAX_NUM_LENGTH - numIntDigits - 1;
+    let actualFracDigits = Math.min(MAX_FRACTION_DIGITS, numFracDigits);
 
-      if (numFracDigits < 0) {
-        return x.toPrecision(MAX_NUM_LENGTH - 1);
-      } else {
-        // Use fixed notation with the appropriate number of fractional digits
-        return x.toFixed(4);
-      }
+    if (actualFracDigits < 0) {
+      str = x.toPrecision(MAX_NUM_LENGTH - MAX_EXP_LENGTH);
+    } else {
+      // Use fixed notation with the appropriate number of fractional digits
+      str = x.toFixed(actualFracDigits);
     }
   }
+
+  // Remove trailing zeros
+  str = str.replace(/(\.\d*?)0+$/, '$1');
+  return str;
+}
 
 // Calculation and Parsing functions
 function tokenize(expression) {
