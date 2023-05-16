@@ -260,9 +260,10 @@ const del = () => {
   delBtn.addEventListener("click", () => {
     if (curr == "" && prev !== "") {
       curr = prev;
-      prev = '';
+      prev = "";
     }
-    if (afterRezult)
+    // stop after rezult display clear after previous input line starts being edited (deleted)
+    if (afterRezult && curr === "")
       afterRezult = false;
 
     curr = curr.slice(0, -1);
