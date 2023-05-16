@@ -247,7 +247,8 @@ const buttons = () => {
           return;
         }
         curr += num.innerText;
-      } else {
+      } 
+      else{
         curr += num.innerText;
       }
       display();
