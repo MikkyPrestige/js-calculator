@@ -137,7 +137,7 @@ const display = () => {
 
 const clearAfterRezult = () => {
   if (afterRezult){
-    prev = '';
+    prev = "";
     afterRezult = false;
   }
 }
@@ -181,6 +181,8 @@ const operation = () => {
       if (prev !== "") {
         // Add new number from current input to previous input that already should contain an operator
         prev += curr;
+        // Calculate result and update previous input line
+        prev = formatNumber(evaluateTokens(tokenize(prev)));
       } else {
         // If previous input was empty set it to current input number
         prev = curr;
@@ -195,6 +197,13 @@ const operation = () => {
 
 operation();
 
+document.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault(); // Prevent default behavior
+    return false;
+  }
+});
+
 const equalsListener = () => {
   equalBtn.addEventListener("click", () => {
     clearAfterRezult();
@@ -205,7 +214,7 @@ const equalsListener = () => {
 
     prev += curr;
     curr = formatNumber(evaluateTokens(tokenize(prev)));
-    prev += ''
+    // prev += "";
     afterRezult = true;
     display();
   });
@@ -218,12 +227,11 @@ const buttons = () => {
     num.addEventListener("click", () => {
       if(endsWithOperator(curr)) {
         prev = curr;
-        curr = '';
+        curr = "";
       }
       clearAfterRezult();
       // limit '0' inputs
       if (curr === "0" && num.innerText == "0") {
-        console.log(`no extra zeros`);
         return;
       }
       if (num.classList.contains("dot")) {
@@ -268,7 +276,7 @@ const del = () => {
       prev = "";
     }
     // stop after rezult display clear after previous input line starts being edited (deleted)
-    if (afterRezult && curr === "")
+    if (afterRezult && prev === "")
       afterRezult = false;
 
     curr = curr.slice(0, -1);
@@ -333,4 +341,3 @@ window.addEventListener('keydown', (e) => {
     clickClear()
   }
 });
-
